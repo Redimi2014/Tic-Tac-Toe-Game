@@ -12,12 +12,10 @@
         <div>
             <label for="player1">Jugador 1 (X)</label>
             <input class="nombre-del__player" type="text" id="player1" placeholder="Jugador 1">
-       
         </div>
         <div>
-            <label   for="player2">Jugador 2 (O)</label>
+            <label for="player2">Jugador 2 (O)</label>
             <input class="nombre-del__player" type="text" id="player2" placeholder="Jugador 2">
-         
         </div>
         <button id="startButton">Comenzar Juego</button>
     </div>
@@ -36,8 +34,22 @@
         <div class="cell" onclick="makeMove(7)"></div>
         <div class="cell" onclick="makeMove(8)"></div>
     </div>
-    <button id="resetButton" style="display: none;" onclick="resetBoard()">Reiniciar</button>
-    <p id="message"></p>
+
+
+    <div class="mostrar-resultados__opciones" id="panelopciones" style="display: none;">
+        <p id="message"></p>
+        <div class="botones-menu__reiniciar">
+            <button class="botones__culminacion" id="irinicio" onclick="irinicio()">inicio</button>
+            <button class="botones__culminacion" id="resetButton" onclick="resetBoard()">Reiniciar</button>
+        </div>
+
+    </div>
+
+    <div>
+        <button class="botones__culminacion" id="irinicio" style="display: none;" onclick="irinicio()">inicio</button>
+        <button  class="botones__culminacion" id="resetButton" style="display: none;" onclick="resetBoard()">Reiniciar</button>
+    </div>
+
     <div id="confirmationModal" class="modal">
         <div class="modal-content">
             <p>¿Seguro que deseas reiniciar la partida?</p>
@@ -46,13 +58,11 @@
         </div>
     </div>
 
-    <button id="irinicio" style="display: none;" onclick="irinicio()">inicio</button>
-    <p id="message"></p>
     <div id="confirmationinicio" class="modal" style="display: none;">
         <div class="modal-content">
             <p>¿Seguro que deseas reiniciar la partida?</p>
-            <button id="confirminicio">Sí</button>
-            <button id="cancelinicio">No</button>
+            <button class="botones-mensaje__inicio" id="confirminicio">Sí</button>
+            <button class="botones-mensaje__inicio" id="cancelinicio">No</button>
         </div>
     </div>
 
