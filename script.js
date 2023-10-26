@@ -1,7 +1,9 @@
 // Variables globales
+const player1Input = document.getElementById("player1");
+const player2Input = document.getElementById("player2");
 let currentPlayer = "X";
-let player1Name = "Jugador 1";
-let player2Name = "Jugador 2";
+let player1Name = "x";
+let player2Name = "O";
 let player1Color = "#FF0000";
 let player2Color = "#0000FF";
 let board = ["", "", "", "", "", "", "", "", ""];
@@ -39,7 +41,7 @@ function resetBoard() {
             cells[i].style.backgroundColor = "";
         }
         //document.getElementById("resetButton").style.display = "none";
-  
+
         document.getElementById("startButton").style.display = "block";
         confirmationModal.style.display = "none"; // Ocultar el modal
         initializeBoard();
@@ -48,7 +50,7 @@ function resetBoard() {
     cancelResetButton.addEventListener("click", () => {
         confirmationModal.style.display = "none"; // Ocultar el modal
 
-   
+
     });
 }
 
@@ -80,10 +82,37 @@ function startCountdown() {
     }, 1000);
 }
 
+
 // Función para mostrar el nombre del jugador ganador
 function showWinner(player) {
-    document.getElementById("message").innerText = `¡El jugador ${player} (${player === "X" ? player1Name : player2Name}) ha ganado!`;
+    // condicion para optener los valores de los textos si estos son o no nulos
+    let player1Value
+    let player2Value
+    if (player1Input.value == "") {
+        player1Value = "Jugador 1"
+        if (player2Input.value == "") {
+            player2Value = "Jugador 2";
+        }
+        else {
+            player2Value = player2Input.value;
+        }
+    }
+    else {
+        player1Value = player1Input.value;
+
+        if (player2Input.value == "") {
+            player2Value = "Jugador 2";
+        }
+        else {
+            player2Value = player2Input.value;
+        }
+    }
+    document.getElementById("message").innerText = `¡El jugador ${player} (${player === "X" ? player1Value : player2Value}) ha ganado!`;
+    document.getElementById("panelopciones").style.display = "block"; // Mostrar el botón "Reiniciar"
+
 }
+// Modifica el mensaje para mostrar el nombre del jugador ganador
+
 
 // Función para hacer un movimiento
 function makeMove(cell) {
@@ -92,7 +121,7 @@ function makeMove(cell) {
         const cellElement = document.getElementsByClassName("cell")[cell];
         cellElement.innerText = currentPlayer === "X" ? player1Name : player2Name;
         cellElement.style.backgroundColor = currentPlayer === "X" ? player1Color : player2Color;
-        
+
         if (checkWin()) {
             showWinner(currentPlayer); // Mostrar al jugador ganador
             gameActive = false;
@@ -133,7 +162,7 @@ function initializeBoard() {
         cells[i].innerText = "";
         cells[i].style.backgroundColor = "";
     }
-  //  document.getElementById("resetButton").style.display = "none"; // Ocultar el botón "Reiniciar"
+    //  document.getElementById("resetButton").style.display = "none"; // Ocultar el botón "Reiniciar"
 }
 
 // Agregar eventos para reiniciar el juego
