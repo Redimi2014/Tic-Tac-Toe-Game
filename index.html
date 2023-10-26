@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <h1>Tic Tac Toe</h1>
+    <div id="menu">
+        <div>
+            <label for="player1">Jugador 1 (X)</label>
+            <input class="nombre-del__player" type="text" id="player1" placeholder="Jugador 1">
+       
+        </div>
+        <div>
+            <label   for="player2">Jugador 2 (O)</label>
+            <input class="nombre-del__player" type="text" id="player2" placeholder="Jugador 2">
+         
+        </div>
+        <button id="startButton">Comenzar Juego</button>
+    </div>
+    <div id="countdown" style="display: none;">
+        <p id="countdownTimer">3</p>
+    </div>
+
+    <div class="board" style="display: none;">
+        <div class="cell" onclick="makeMove(0)"></div>
+        <div class="cell" onclick="makeMove(1)"></div>
+        <div class="cell" onclick="makeMove(2)"></div>
+        <div class="cell" onclick="makeMove(3)"></div>
+        <div class="cell" onclick="makeMove(4)"></div>
+        <div class="cell" onclick="makeMove(5)"></div>
+        <div class="cell" onclick="makeMove(6)"></div>
+        <div class="cell" onclick="makeMove(7)"></div>
+        <div class="cell" onclick="makeMove(8)"></div>
+    </div>
+    <button id="resetButton" style="display: none;" onclick="resetBoard()">Reiniciar</button>
+    <p id="message"></p>
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p>¿Seguro que deseas reiniciar la partida?</p>
+            <button id="confirmReset">Sí</button>
+            <button id="cancelReset">No</button>
+        </div>
+    </div>
+
+    <button id="irinicio" style="display: none;" onclick="irinicio()">inicio</button>
+    <p id="message"></p>
+    <div id="confirmationinicio" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p>¿Seguro que deseas reiniciar la partida?</p>
+            <button id="confirminicio">Sí</button>
+            <button id="cancelinicio">No</button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
