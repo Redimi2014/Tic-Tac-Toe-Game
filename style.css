@@ -1,264 +1,137 @@
-/* Estilo para el cuerpo de la página */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #d6d5d5;
-    margin: 0;
+* {
     padding: 0;
-    transition: all 0.5s;
-}
-
-/* Estilo para el título */
-h1 {
-    color: #333;
-    margin: 20px;
-    transition: all 0.5s;
-}
-
-/* Estilo para el menú de opciones */
-#menu {
-    background-color: rgb(255, 195, 215);
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    margin: 2rem auto;
-    box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s;
-}
-
-#menu label,
-#menu button {
-    display: block;
-    transition: all 0.5s;
-
-}
-
-
-label {
-    text-decoration: none;
-
-    font-size: 25px;
-    transition: all 0.5s;
-}
-
-.nombre-del__player {
-    all: initial;
-    border-bottom: 1px solid #000;
-    height: 30px;
-    margin-top: 10px;
-    margin-bottom: 25px;
-    transition: all 0.5s;
-}
-
-.nombre-del__player::placeholder {
-    color: #2c2c2c;
-    transition: all 0.5s;
-}
-
-/* Estilo para el botón de Comenzar Juego */
-#startButton {
-    background-color: rgb(255, 0, 85);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-
-    width: 100%;
-    cursor: pointer;
-    box-shadow: 0 3px 5px 3px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s;
-}
-
-#startButton:hover {
-    background-color: rgb(185, 0, 62);
-    transition: all 0.5s;
-}
-
-/* Estilo para el conteo regresivo */
-#countdown {
-    display: none;
-    font-size: 24px;
-    margin-top: 20px;
-    transition: all 0.5s;
-}
-
-#countdownTimer {
-    font-size: 36px;
-    color: #333;
-    margin-top: 10px;
-    transition: all 0.5s;
-}
-
-/* Estilo para el tablero de juego */
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
-    text-align: center;
-    align-content: center;
-    background: rgb(255, 0, 85);
-    box-shadow: 0 0 10px 7px rgba(0, 0, 0, 0.5);
-    transition: all 0.5s;
-
-}
-
-.cell {
-    width: 100px;
-    height: 100px;
-    background-color: rgb(255, 195, 215);
-    border: 1px solid #000;
-    font-size: 24px;
-    display: flex;
-    margin-left: -6px;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s;
-}
-
-.cell:hover {
-    background-color: rgb(255, 164, 195);
-    width: 105px;
-    height: 105px;
-    transition: all 0.2s;
-}
-
-/* Estilo para el botón de Reiniciar 
-#resetButton {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin: 20px auto;
-    transition: all 0.5s;
-}
-
-#resetButton:hover {
-    background-color: #d32f2f;
-    transition: all 0.5s;
-}*/
-
-/* Estilo para el mensaje */
-#message {
-    font-size: 18px;
-    margin: 20px;
-    color: #333;
-    transition: all 0.5s;
-}
-
-
-/* Estilo para la ventana modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    justify-content: center;
-    align-items: center;
-    padding-top: 17rem;
-    transition: all 0.5s;
-
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-    transition: all 0.5s;
-}
-
-
-#botones-mensaje__inicio {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin: 5px;
-    transition: all 0.5s;
-}
-
-
-#botones-mensaje__inicio:hover {
-    background-color: #45a049;
-    transition: all 0.5s;
-}
-
-.mostrar-resultados__opciones {
-    position: fixed;
-    top: 4rem;
-    left: 0;
-    right: 0;
-    width: 315px;
-    height: 300px;
-    /* Ancho fijo del banner */
-    background-color: greenyellow;
-    /* Color de fondo del banner */
-    color: #fff;
-    /* Color de texto en el banner */
-    text-align: center;
-    /* Alinear el contenido al centro */
-    padding: 10px 0;
-    /* Espaciado interno */
-    margin: 0 auto;
-    /* Centrar horizontalmente */
-    /* z-index: 1000; /* Coloca el banner en la parte superior */
-}
-
-.mostrar-resultados__opciones p {
-
     margin: 0;
-    padding: 10px;
-
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    transition: all 0.5s;
 }
 
-
-
-.mostrar-resultados__opciones button:hover {
-    background-color: goldenrod;
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, rgb(128, 1, 43), rgb(255, 0, 85), rgb(128, 1, 43));
+    transition: all 0.5s;
 }
 
+html {
+    font-size: 16px;
+    transition: all 0.5s;
+}
 
-.botones-menu__reiniciar {
+.wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transition: all 0.5s;
+}
+
+.container {
+    width: 70vmin;
+    height: 70vmin;
     display: flex;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 315px;
-    /* Ancho fijo del banner */
-    background-color: greenyellow;
-    /* Color de fondo del banner */
-    color: #fff;
-    /* Color de texto en el banner */
-    text-align: center;
-    /* Alinear el contenido al centro */
-    padding: 10px 0;
-    /* Espaciado interno */
-    margin: 200px auto;
-    /* Centrar horizontalmente */
-    z-index: 1000;
-    /* Coloca el banner en la parte superior */
+    flex-wrap: wrap;
+    gap: 2vmin;
+    transition: all 0.5s;
 }
 
-.botones-menu__reiniciar .botones__culminacion{
-   border: 0;
-   border-radius: 10px;
-   margin: none;
-   background: rgb(255, 0, 85);
-    margin: 0 10%;
-    width: 500px;
-    height: 40px;
-    font-size: 20px;
+.button-option {
+    background: #ffffff;
+    height: 22vmin;
+    width: 22vmin;
+    border: none;
+    border-radius: 8px;
+    font-size: 12vmin;
+    color: rgb(255, 0, 85);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+
+.button-option:hover {
+    height: 21vmin;
+    width: 21vmin;
+    background: rgb(255, 0, 85);
+    color: #ffffff;
+    border: 1rem groove rgb(128, 1, 43);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.568);
+    transition: all 0.5s;
+}
+
+#restart {
+    font-size: 1.3em;
+    padding: 1em;
+    border-radius: 8px;
+    background-color: rgb(128, 1, 43);
+    color: #ffffff;
+    border: none;
+    position: relative;
+    margin: 1.5em auto 0 auto;
+    display: block;
+    cursor: pointer;
+    border: 0.1rem solid rgb(255, 0, 85);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.568);
+    transition: all 0.2s;
+}
+
+#restart:hover {
+    background-color: rgb(255, 0, 85);
+    border: 0.1rem solid rgb(128, 1, 43);
+    transition: all 0.2s;
+
+}
+
+.popup {
+    background: linear-gradient(135deg, rgb(128, 1, 43), rgb(255, 0, 85), rgb(128, 1, 43));
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 12vmin;
+    transition: all 0.5s;
+}
+
+#new-game {
+    font-size: 0.6em;
+    padding: 0.5em 1em;
+    background-color: rgb(128, 1, 43);
+    color: #ffffff;
+    border-radius: 0.2em;
+    border: none;
+    cursor: pointer;
+    border: 0.1rem solid rgb(255, 0, 85);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.568);
+    transition: all 0.5s;
+
+}
+
+#new-game:hover {
+    background-color: rgb(255, 0, 85);
+    border: 0.1rem solid rgb(128, 1, 43);
+    transition: all 0.2s;
+
+}
+
+#message {
+    color: #ffffff;
+    text-align: center;
+    font-size: 1em;
+    transition: all 0.5s;
+}
+
+.popup.hide {
+    display: none;
+    transition: all 0.5s;
+}
+
+h1 {
+    text-decoration: none;
+    color: #ffffff;
+    margin: 2rem 0;
+    text-align: center;
 }

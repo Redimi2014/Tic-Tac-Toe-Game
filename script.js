@@ -1,195 +1,108 @@
-// Variables globales
-const player1Input = document.getElementById("player1");
-const player2Input = document.getElementById("player2");
-let currentPlayer = "X";
-let player1Name = "x";
-let player2Name = "O";
-let player1Color = "#FF0000";
-let player2Color = "#0000FF";
-let board = ["", "", "", "", "", "", "", "", ""];
-let gameActive = false;
+let btnRef = document.querySelectorAll(".button-option");
+let popupRef = document.querySelector(".popup");
+let newgameBtn = document.getElementById("new-game");
+let restartBtn = document.getElementById("restart");
+let msgRef = document.getElementById("message");
+//Matriz de patrones ganadores
+let winningPattern = [
+    [0, 1, 2],
+    [0, 3, 6],
+    [2, 5, 8],
+    [6, 7, 8],
+    [3, 4, 5],
+    [1, 4, 7],
+    [0, 4, 8],
+    [2, 4, 6],
+];
+//El jugador'X' Juega primero
+let xTurn = true;
+let count = 0;
 
-// Función para mostrar la ventana modal de reinicio
-function showConfirmation() {
-    if (gameActive) {
-        document.getElementById("confirmationModal").style.display = "block";
-    }
-}
+//Desactivar todos los botones
+const disableButtons = () => {
+    btnRef.forEach((element) => (element.disabled = true));
+    //Activar popup
+    popupRef.classList.remove("hide");
+};
 
-// Función para ocultar la ventana modal de reinicio
-function hideConfirmation() {
-    document.getElementById("confirmationModal").style.display = "none";
-}
-
-// Función para reiniciar el juego
-// Función para reiniciar el juego
-function resetBoard() {
-    const confirmationModal = document.getElementById("confirmationModal");
-    confirmationModal.style.display = "block"; // Mostrar el modal
-
-    const confirmResetButton = document.getElementById("confirmReset");
-    const cancelResetButton = document.getElementById("cancelReset");
-
-    confirmResetButton.addEventListener("click", () => {
-        currentPlayer = "X";
-        board = ["", "", "", "", "", "", "", "", ""];
-        gameActive = false;
-        document.getElementById("message").innerText = "";
-        const cells = document.getElementsByClassName("cell");
-        for (let i = 0; i < cells.length; i++) {
-            cells[i].innerText = "";
-            cells[i].style.backgroundColor = "";
-        }
-        //document.getElementById("resetButton").style.display = "none";
-
-        document.getElementById("startButton").style.display = "block";
-        confirmationModal.style.display = "none"; // Ocultar el modal
-        initializeBoard();
+//Habilitar todos los botones (para juego nuevo y reiniciar)
+const enableButtons = () => {
+    btnRef.forEach((element) => {
+        element.innerText = "";
+        element.disabled = false;
     });
+    //Deshabilitar popup
+    popupRef.classList.add("hide");
+};
 
-    cancelResetButton.addEventListener("click", () => {
-        confirmationModal.style.display = "none"; // Ocultar el modal
+//Esta función se ejecuta cuando un jugador gana.
+const winFunction = (letter) => {
+    disableButtons();
+    if (letter == "X") {
+        msgRef.innerHTML = "&#x1F60E;  jugador &#x274C; Ganador  &#x1F38A;";
+    } else {
+        msgRef.innerHTML = "&#x1F60E;  jugador &#x2B55; Ganador  &#x1F38A;";
+    }
+};
 
+//Función for draw
+const drawFunction = () => {
+    disableButtons();
+    msgRef.innerHTML = "&#x1F644;  Es un Empate  &#x1F921;";
+};
 
-    });
-}
+//Nuevo juego
+newgameBtn.addEventListener("click", () => {
+    count = 0;
+    enableButtons();
+});
+restartBtn.addEventListener("click", () => {
+    count = 0;
+    enableButtons();
+});
 
-
-// Función para comenzar el juego
-document.getElementById("startButton").addEventListener("click", startCountdown);
-
-// Función para comenzar el conteo regresivo
-function startCountdown() {
-    document.getElementById("menu").style.display = "none"; // Ocultar el menú de opciones
-    document.getElementById("countdown").style.display = "block"; // Mostrar el conteo regresivo
-    let countdownTime = 3; // Tiempo en segundos para el conteo regresivo
-
-    const countdownTimer = document.getElementById("countdownTimer");
-    countdownTimer.innerText = countdownTime;
-
-    const countdownInterval = setInterval(() => {
-        countdownTime--;
-        countdownTimer.innerText = countdownTime;
-
-        if (countdownTime === 0) {
-            clearInterval(countdownInterval);
-            document.getElementById("countdown").style.display = "none"; // Ocultar el conteo regresivo
-            document.getElementById("resetButton").style.display = "block"; // Mostrar el botón "Reiniciar"
-            document.querySelector('.board').style.display = "grid"; // Mostrar el tablero
-            document.getElementById("irinicio").style.display = "block";
-            initializeBoard(); // Inicializar el tablero
-        }
-    }, 1000);
-}
-
-
-// Función para mostrar el nombre del jugador ganador
-function showWinner(player) {
-    // condicion para optener los valores de los textos si estos son o no nulos
-    let player1Value
-    let player2Value
-    if (player1Input.value == "") {
-        player1Value = "Jugador 1"
-        if (player2Input.value == "") {
-            player2Value = "Jugador 2";
-        }
-        else {
-            player2Value = player2Input.value;
+//Logica de partida ganada
+const winChecker = () => {
+    //Recorre todos los patrones ganadores
+    for (let i of winningPattern) {
+        let [element1, element2, element3] = [
+            btnRef[i[0]].innerText,
+            btnRef[i[1]].innerText,
+            btnRef[i[2]].innerText,
+        ];
+        //Comprobar si los elementos están llenos
+        //Si 3 elementos vacíos son iguales y ganarían como lo harían
+        if (element1 != "" && (element2 != "") & (element3 != "")) {
+            if (element1 == element2 && element2 == element3) {
+                //Si los 3 botones tienen los mismos valores, pase el valor a winFunction
+                winFunction(element1);
+            }
         }
     }
-    else {
-        player1Value = player1Input.value;
+};
 
-        if (player2Input.value == "") {
-            player2Value = "Jugador 2";
-        }
-        else {
-            player2Value = player2Input.value;
-        }
-    }
-    document.getElementById("message").innerText = `¡El jugador ${player} (${player === "X" ? player1Value : player2Value}) ha ganado!`;
-    document.getElementById("panelopciones").style.display = "block"; // Mostrar el botón "Reiniciar"
-
-}
-// Modifica el mensaje para mostrar el nombre del jugador ganador
-
-
-// Función para hacer un movimiento
-function makeMove(cell) {
-    if (gameActive && board[cell] === "") {
-        board[cell] = currentPlayer;
-        const cellElement = document.getElementsByClassName("cell")[cell];
-        cellElement.innerText = currentPlayer === "X" ? player1Name : player2Name;
-        cellElement.style.backgroundColor = currentPlayer === "X" ? player1Color : player2Color;
-
-        if (checkWin()) {
-            showWinner(currentPlayer); // Mostrar al jugador ganador
-            gameActive = false;
-        } else if (board.indexOf("") === -1) {
-            document.getElementById("message").innerText = "¡Es un empate!";
-            gameActive = false;
+//Mostrar X/O al hacer clic
+btnRef.forEach((element) => {
+    element.addEventListener("click", () => {
+        if (xTurn) {
+            xTurn = false;
+            //Mostrar X
+            element.innerText = "X";
+            element.disabled = true;
         } else {
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
+            xTurn = true;
+            //Mostrar Y
+            element.innerText = "O";
+            element.disabled = true;
         }
-    }
-}
-
-// Función para verificar si hay un ganador
-function checkWin() {
-    const winCombos = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],
-        [0, 4, 8], [2, 4, 6]
-    ];
-    for (const combo of winCombos) {
-        if (board[combo[0]] === currentPlayer &&
-            board[combo[1]] === currentPlayer &&
-            board[combo[2]] === currentPlayer) {
-            return true;
+        //Incrementar el recuento en cada clic
+        count += 1;
+        if (count == 9) {
+            drawFunction();
         }
-    }
-    return false;
-}
-
-// Inicializar el tablero
-function initializeBoard() {
-    currentPlayer = "X";
-    board = ["", "", "", "", "", "", "", "", ""];
-    gameActive = true;
-    document.getElementById("message").innerText = "";
-    const cells = document.getElementsByClassName("cell");
-    for (let i = 0; i < cells.length; i++) {
-        cells[i].innerText = "";
-        cells[i].style.backgroundColor = "";
-    }
-    //  document.getElementById("resetButton").style.display = "none"; // Ocultar el botón "Reiniciar"
-}
-
-// Agregar eventos para reiniciar el juego
-document.getElementById("resetButton").addEventListener("click", showConfirmation);
-document.getElementById("confirmReset").addEventListener("click", resetBoard);
-document.getElementById("cancelReset").addEventListener("click", hideConfirmation);
-
-
-
-// Agregar eventos para volver al inicio
-document.getElementById("irinicio").addEventListener("click", showInicioConfirmation);
-document.getElementById("confirminicio").addEventListener("click", irInicio);
-document.getElementById("cancelinicio").addEventListener("click", hideInicioConfirmation);
-
-
-
-// Función para mostrar el cuadro modal de inicio
-function showInicioConfirmation() {
-    document.getElementById("confirmationinicio").style.display = "block";
-}
-
-// Función para ocultar el cuadro modal de inicio
-function hideInicioConfirmation() {
-    document.getElementById("confirmationinicio").style.display = "none";
-}
-
-// Función para volver al inicio (recargar la página)
-function irInicio() {
-    location.reload(); // Recargar la página
-}
+        //Compruebe si gana con cada clic
+        winChecker();
+    });
+});
+//Habilitar botones y deshabilitar ventanas emergentes al cargar la página
+window.onload = enableButtons;
